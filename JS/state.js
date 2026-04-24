@@ -1,12 +1,25 @@
+const API_URL = "http://localhost:8080/TasksAPI/api/task"
+
 export let tasks =[];
 
-export const addTask = (text) =>{
-    const task = {id: Date.now(), text, completed: false};
-    tasks.push(task);
+export const getTasks = async ()=>{
+    const response = await fetch(API_URL);
+    tasks = await response.json();
     return tasks;
 }
 
-export const deleteTask = (id) =>{
+export const addTask = async (text) =>{
+    const reponse = await fetch(API_URL, {
+        method: 'POST',
+        headers: {'Content-Type': "application/json"},
+        body: JSON.stringify({text:text, completed:false})
+    });
+    const newTask = await response.json();
+    tasks.push(newTask);
+    return tasks;
+}
+
+export const deleteTask = async (id) =>{
     tasks = tasks.filter(t => t.id !== id);
     return tasks;
 }
