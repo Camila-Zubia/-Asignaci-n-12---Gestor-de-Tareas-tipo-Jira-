@@ -1,30 +1,20 @@
 const list = document.getElementById("taskList")
 
 export const render = (tasks) => {
-    list.innerHTML = '';
+    list.innerHTML = "";
+
     tasks.forEach(t => {
         const li = document.createElement('li');
         li.className = `task-item ${t.complete ? 'completed' : ''}`;
         li.dataset.id = t.id;
 
-        const span = document.createElement('span');
-        span.textContent = t.text;
-
-        const actions = document.createElement('div');
-        actions.className = 'actions';
-
-        const btnEdit = document.createElement('button');
-        btnEdit.className = 'btn-edit';
-        btnEdit.textContent = 'e';
-
-        const btnDelete = document.createElement('button');
-        btnDelete.className = 'btn-delete';
-        btnDelete.textContent = 'x';
-
-        li.appendChild(span);
-        actions.appendChild(btnEdit);
-        actions.appendChild(btnDelete);
-        li.appendChild(actions);
+        li.innerHTML = `
+        <span>${t.text}</span>
+        <div class="actions">
+            <button class="btn-edit">✏️</button>
+            <button class="btn-delete">x</button>
+        </div>
+        `;
         list.appendChild(li);
     })
 }

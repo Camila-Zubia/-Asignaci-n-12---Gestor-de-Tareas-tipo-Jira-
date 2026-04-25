@@ -27,8 +27,8 @@ document.addEventListener('DOMContentLoaded',async () => {
             await state.deleteTask(id);
         } else if (e.target.classList.contains('btn-edit')) {
             const task = state.tasks.find(t => t.id === id);
-            const newText = prompt("editar: ", task.text);
-            if (newText) state.editTask(id, newText)
+            const newText = prompt("Editar: ", task.text);
+            if (newText) await state.editTask(id, newText)
         } else if (e.target.tagName !== 'BUTTON') {
             await state.toggleTask();
         }
